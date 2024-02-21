@@ -17,6 +17,6 @@ We test if network architectures are capatable of detecting long range relations
 We test if network architectures are capatable of capturing multi-scale objects. 
 |     Method                   |  Params |  FLOPs  |  mIoU  |
 | :-------------------------:  | :-----: | :-----: | :----: |
-|     UNet (with  CoordConv)   |  34.53  |  262.70 |  70.88 |
-|     UNETR                    |  85.47  |  105.65 |  81.98 |
+|     UNet (with  CoordConv)   |  34.53  |  262.70 |  72.12 |
+|     UNETR                    |  85.47  |  105.65 |  91.75 |
 |     SUNeXt-L (Ours)          |  11.97  |  25.65  |  95.74 |
