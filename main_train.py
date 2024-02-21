@@ -1,6 +1,6 @@
 # modified from https://github.com/LiheYoung/ST-PlusPlus/blob/master/main.py
 
-from utils.utils import count_params, meanIOU
+from utils import count_params, meanIOU
 import argparse
 from copy import deepcopy
 import numpy as np
