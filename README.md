@@ -10,8 +10,8 @@ We test if network architectures are capatable of detecting long range relations
 | :-------------------------:  | :-----: | :-----: | :----: |
 |     UNet                     |  34.53  |  262.17 |  74.51 |
 |     UNet (with  CoordConv)   |  34.53  |  262.70 |  79.00 |
-|     UNETR                    |  85.47  |  105.65 |  92.81 |
-|     SUNeXt-L (Ours)          |  11.97  |  25.65  |  97.86 |
+|     UNETR                    |  85.47  |  105.65 |  93.59 |
+|     SUNeXt-L (Ours)          |  11.97  |  25.65  |  97.66 |
 
 ## MNIST dataset (segmentation, with multi-scale scaling)
 We test if network architectures are capatable of capturing multi-scale objects. 
