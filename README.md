@@ -9,12 +9,8 @@ This is the official implementation of our work "Exploring a Better Network Arch
 
 ## Requirements
    ```bash
-   pip install torch torchvision
-   pip install albumentations
-   pip install monai==1.2.0
-   pip install timm==0.9.12
+   pip install torch torchvision albumentations  monai==1.2.0 timm==0.9.12
    ```
-
 
 
 ## Results
