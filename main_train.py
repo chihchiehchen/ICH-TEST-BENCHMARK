@@ -47,6 +47,25 @@ from albumentations import (
 MODE = None
 
 
+def cutmix(l_img, l_mask,  args):
+    r = np.random.rand(1)
+    
+    batch_size = l_img.size()[0]
+    if  r < args.cutmix_prob:
+        if torch.cuda.is_available():
+            index = torch.randperm(batch_size).cuda()
+        else:
+            index = torch.randperm(batch_size)
+        add_img = l_img[index]
+        add_mask = l_mask[index]
+
+        l_img = torch.maximum(l_img, add_img)
+        l_mask = torch.maximum(l_mask,add_mask)
+       
+    
+    return l_img, l_mask
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description='MNIST test')
 
@@ -69,17 +88,14 @@ def parse_args():
     parser.add_argument('--model', type=str, choices=['unet','unet_coord','unext_seg_adapt_l','unetr'],
                         default='unet')  #todo 
     parser.add_argument('--opt', type=str, default='AdamW')
-    # semi-supervised settings
-    
+    parser.add_argument('--cutmix_prob', type=float, default=0.7)
+    parser.add_argument('--cutmix', type=int, default=-100)
     parser.add_argument('--val-dir', default="/home/chihchiehchen/Exploring-a-Better-Network-Architecture-for-Large-Scale-ICH-Segmentation/mnist_png/mnist_png/testing", type=str, help='val_dir')
     parser.add_argument('--train-dir', default="/home/chihchiehchen/Exploring-a-Better-Network-Architecture-for-Large-Scale-ICH-Segmentation/mnist_png/mnist_png/training", type=str, help='ich_dir')
     parser.add_argument('--in-ch', type=int, default=3)
     parser.add_argument('--nb-classes', type=int, default=11)
     parser.add_argument('--class-weights', type=float, default = [1,1,1,1,1,1,1,1,1,1,1],nargs='+')
-    parser.add_argument('--save-model-path', type=str, default='./') #todo
-
-    
-    
+    parser.add_argument('--save-model-path', type=str, default='./') 
     
     args = parser.parse_args()
     return args
@@ -167,10 +183,12 @@ def train(model, trainloader, valloader, optimizer, args ,add_normal = None,lr_s
             
             l_img, l_mask,l_mask_name = element[0],element[1],element[2]
             l_img, l_mask = l_img.cuda(), l_mask.cuda()
+
+            if args.cutmix >= -1:
+                if epoch >= args.cutmix:
+                    l_img, l_mask = vrm(l_img, l_mask, args)
             
-            l_pred = model(l_img)
-            
-            
+            l_pred = model(l_img)     
 
             criterion = CrossEntropyLoss(weight = class_weights)
             
