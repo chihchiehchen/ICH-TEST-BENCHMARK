@@ -19,7 +19,7 @@ This is the official implementation of our work "Exploring a Better Network Arch
    We test if network architectures are capatable of detecting long range relations. Run the following command:
     
    ```bash
-   python main_train.py --model unet(unet_coord/unetr/unext_seg_adapt_l)
+   python main_train.py --model unet(unet_coord/unetr/unext_seg_adapt_l/swin_unetr)
    ```
     
    |     Method                   |  Params |  FLOPs  |  mIoU  |
@@ -30,9 +30,11 @@ This is the official implementation of our work "Exploring a Better Network Arch
    |     SUNeXt-L (Ours)          |  11.97  |  25.65  |  97.66 |
 
 ## MNIST dataset (segmentation, with multi-scale scaling)
-We test if network architectures are capatable of capturing multi-scale objects. 
-|     Method                   |  Params |  FLOPs  |  mIoU  |
-| :-------------------------:  | :-----: | :-----: | :----: |
-|     UNet (with  CoordConv)   |  34.53  |  262.70 |  72.12 |
-|     UNETR                    |  85.47  |  105.65 |  91.75 |
-|     SUNeXt-L (Ours)          |  11.97  |  25.65  |  95.74 |
+    We test if network architectures are capatable of capturing multi-scale objects. 
+
+
+   |     Method                   |  Params |  FLOPs  |  mIoU  |
+   | :-------------------------:  | :-----: | :-----: | :----: |
+   |     UNETR                    |  85.47  |  105.65 |  73.13 |
+   |     SwinUNETR                |   6.28  |   19.61 |  92.69 |
+   |     SUNeXt-L (Ours)          |  11.97  |  25.65  |  93.72 |
