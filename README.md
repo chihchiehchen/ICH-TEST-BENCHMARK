@@ -1,5 +1,5 @@
 # Exploring-a-Better-Network-Architecture-for-Large-Scale-ICH-Segmentation
-This is the official implementation of our work "Exploring a Better Network Architecture for Large-Scale ICH Segmentation". Since our collected ICH datasets are unavailable, we demonstrate our results by using MNIST datasets with the following two settings.
+This is the official implementation of our work "Exploring a Better Network Architecture for Large-Scale ICH Segmentation". Since our collected ICH datasets are unavailable, we demonstrate our results by using MNIST datasets with the following two settings. We construct simulated datasets to partially exlain why UNet and UNETR achieve suboptimal results in ICH multi-class segmentation tasks.  
 
 ## Create masks for MNIST simulated segmentation dataset
    Extract mnist_png.tar.gz in the repository, find train and test directories and run 
