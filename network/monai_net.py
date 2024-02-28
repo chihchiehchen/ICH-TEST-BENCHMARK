@@ -3,7 +3,7 @@ from monai import config
 from monai.data import ArrayDataset, create_test_image_2d, decollate_batch
 from monai.inferers import sliding_window_inference
 from monai.metrics import DiceMetric
-from monai.networks.nets import UNet,UNETR #,SwinUNETR
+from monai.networks.nets import UNet,UNETR ,SwinUNETR
 from monai.transforms import Activations, AddChannel, AsDiscrete, Compose, LoadImage, SaveImage, ScaleIntensity, EnsureType
 import torch.nn as nn
 from .vanilla_unet import U_Net
