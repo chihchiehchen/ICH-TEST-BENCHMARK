@@ -9,7 +9,7 @@ This is the official implementation of our work "Exploring a Better Network Arch
 
 ## Requirements
    ```bash
-   pip install torch torchvision albumentations  monai==1.2.0 timm==0.9.12
+   pip install numpy pillow cv2 torch torchvision albumentations  monai==1.2.0 timm==0.9.12
    ```
 
 
@@ -29,9 +29,11 @@ This is the official implementation of our work "Exploring a Better Network Arch
    |     UNETR                    |  85.47  |  105.65 |  93.59 |
    |     SUNeXt-L (Ours)          |  11.97  |  25.65  |  97.66 |
 
-## MNIST dataset (segmentation, with multi-scale scaling)
-    We test if network architectures are capatable of capturing multi-scale objects. 
+## MNIST dataset (segmentation, with multi-scale scaling, '0' digit as background label, randomly mix two digits in one image)
+    This is a harder task. We set the label of '0' digit the same as the background label to simulate bones, tumors, califications in ICH dataset,
+    and randomly mix two digits in one image. Run the following command:
 
+    
 
    |     Method                   |  Params |  FLOPs  |  mIoU  |
    | :-------------------------:  | :-----: | :-----: | :----: |
