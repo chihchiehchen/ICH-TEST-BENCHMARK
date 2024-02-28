@@ -7,6 +7,16 @@ This is the official implementation of our work "Exploring a Better Network Arch
    python create_mask.py --dir_list address_of_training_directories address_of_testing_directories
    ```
 
+## Requirements
+   ```bash
+   pip install torch torchvision
+   pip install albumentations
+   pip install monai==1.2.0
+   pip install timm==0.9.12
+   ```
+
+
+
 ## Results
 
 ## MNIST dataset (segmentation, resize to 512 x 512)
