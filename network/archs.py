@@ -480,7 +480,7 @@ class UNext_block(nn.Module):
         out += self.skip(x)
         return self.act(out)
 
-class UNext_seg_adapt(nn.Module):
+class SUNext(nn.Module):
     def __init__(self,out_ch = 6, in_ch=3, b_l =3,embed_dims=[ 128, 192, 256]):
         super().__init__()
         self.coord = CoordConv2d(in_channels=in_ch, out_channels=32,kernel_size = 3)
@@ -496,7 +496,7 @@ class UNext_seg_adapt(nn.Module):
 
         return out
 
-def UNext_seg_adapt_l(out_ch, in_ch):
-    return UNext_seg_adapt(out_ch, in_ch,b_l = 3,embed_dims=[ 128, 256, 512])
+def SUNext_L(out_ch, in_ch):
+    return SUNext(out_ch, in_ch,b_l = 3,embed_dims=[ 128, 256, 512])
 #EOF
 
