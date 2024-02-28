@@ -13,9 +13,9 @@ import cv2
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 from monai.losses import DiceLoss
-from network.monai_net import  UNETR_2d,U_Net_vanilla
+from network.monai_net import  UNETR_2d,U_Net_vanilla,SwinUNETR_2d
 from network.vanilla_unet import U_Net_coord
-from network.archs import UNext,UNext_seg_adapt,UNext_seg_adapt_l
+from network.archs import UNext,UNext_seg_adapt,SUNext_L
 
 from resize_dataset import MNISTResizeDataset
 import torchvision.utils as v_utils
@@ -85,7 +85,7 @@ def parse_args():
     parser.add_argument('--balance', type=str, choices=['normal','weight','extreme'],
                         default='normal')
     parser.add_argument('--balance', type=str,default='False')
-    parser.add_argument('--model', type=str, choices=['unet','unet_coord','unext_seg_adapt_l','unetr'],
+    parser.add_argument('--model', type=str, choices=['unet','unet_coord','unext_seg_adapt_l','unetr','swinunetr'],
                         default='unet')  #todo 
     parser.add_argument('--opt', type=str, default='AdamW')
     parser.add_argument('--cutmix_prob', type=float, default=0.7)
@@ -137,7 +137,7 @@ def main(args):
     
 
 def init_basic_elems(args):
-    model_zoo = {'unet': U_Net_vanilla,'unetr': UNETR_2d,'unet_coord':U_Net_coord,'unext_seg_adapt_l':UNext_seg_adapt_l} # todo: setup models
+    model_zoo = {'unet': U_Net_vanilla,'unetr': UNETR_2d,'unet_coord':U_Net_coord,'sunext':SUNext_L, 'swinunetr': SwinUNETR_2d} # todo: setup models
     model = model_zoo[args.model](in_ch =args.in_ch,out_ch = args.nb_classes - int(args.background))
 
     if args.opt == 'SGD':
