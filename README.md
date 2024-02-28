@@ -20,6 +20,7 @@ This is the official implementation of our work "Exploring a Better Network Arch
     ```bash
     python main_train.py --model unet(unet_coord/unetr/unext_seg_adapt_l)
     ```
+    
     |     Method                   |  Params |  FLOPs  |  mIoU  |
     | :-------------------------:  | :-----: | :-----: | :----: |
     |     UNet                     |  34.53  |  262.17 |  74.51 |
