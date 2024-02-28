@@ -30,7 +30,7 @@ from albumentations import (
 )
 
 class MNISTResizeDataset(Dataset):
-    def __init__(self, img_dir, img_size = 512 , transform=[ShiftScaleRotate(scale_limit=(0,0.20), rotate_limit=15, shift_limit=0.1, p=0.5, border_mode=cv2.BORDER_CONSTANT, value=0)]):
+    def __init__(self, img_dir, img_size = 512 , backgound = False, balance = 'normal' ,transform=[ShiftScaleRotate(scale_limit=(0,0.20), rotate_limit=15, shift_limit=0.1, p=0.5, border_mode=cv2.BORDER_CONSTANT, value=0)]):
         
         self.img_dir = img_dir
         self.mask_dir = img_dir + "_mask"
@@ -45,11 +45,20 @@ class MNISTResizeDataset(Dataset):
     def prepare_dir(self):
         for dirPath, dirNames, fileNames in os.walk(self.img_dir):
             for f in fileNames:
-                if '.png' in f:
-                    img_path = os.path.join(dirPath,f)
-                    mask_path = img_path.replace(self.img_dir,self.mask_dir)
-                    self.pair_list.append((img_path,mask_path))
-
+                if len(fileNames) >0 and  '.png' in fileNames[0]:
+                    if balance == 'normal':
+                        count = len(fileNames)
+                    elif balance == 'weight':
+                        count = (10- int(dirPath.split("/")[-1]))*len(fileNames)//10
+                    else:
+                        count =  max(int(  ( ( 10- int(dirPath.split("/")[-1]) )/10)**2*len(fileNames)),50) 
+                    print(dirPath.split("/")[-1],len(fileNames),count)
+                    if '.png' in f:
+                        if count >= 0:
+                            img_path = os.path.join(dirPath,f)
+                            mask_path = img_path.replace(self.img_dir,self.mask_dir)
+                            self.pair_list.append((img_path,mask_path))
+                            count -= 1
         
 
     def __getitem__(self, idx):
@@ -66,6 +75,8 @@ class MNISTResizeDataset(Dataset):
         targetmask = np.array(targetmask) #change to numpy
             
         targetmask = np.round((targetmask*(1/self.key_ratio)))
+        if background:
+            targetmask = np.where(targetmask >0, targetmask -1, targetmask)
         targetmask = targetmask.astype('int')
         #assert set(np.unique(targetmask).tolist()).issubset(set([x for x in range(self.nb_classes)])) 
 
