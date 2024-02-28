@@ -19,7 +19,7 @@ This is the official implementation of our work "Exploring a Better Network Arch
    We test if network architectures are capatable of detecting long range relations. Run the following command:
     
    ```bash
-   python main_train.py --model unet(unet_coord/unetr/unext_seg_adapt_l/swin_unetr_2d) --save-model-path address_of_save_model_path
+   python main_train.py --model unet(unet_coord/unetr/sunext/swin_unetr_2d) --save-model-path address_of_save_model_path
    ```
     
    |     Method                   |  Params |  FLOPs  |  mIoU  |
@@ -34,7 +34,7 @@ This is the official implementation of our work "Exploring a Better Network Arch
    and create inbalance dataset to simulate the data distribution of ICH dataset. Finally we randomly mix two digits in one image. Run the following command:
 
    ```bash
-   python main_train.py --model unet(unet_coord/unetr/unext_seg_adapt_l/swin_unetr) --background True --balance extreme --class-weights 1 1.12 1.125 1.143 1.167 2 2.25 3.33 5 10 --transform center_scaling  --lr_scheduler True  --cutmix 0 --save-model-path address_of_save_model_path 
+   python main_train.py --model unet(unet_coord/unetr/sunext/swin_unetr) --background True --balance extreme --class-weights 1 1.12 1.125 1.143 1.167 2 2.25 3.33 5 10 --transform center_scaling  --lr_scheduler True  --cutmix 0 --save-model-path address_of_save_model_path 
    ``` 
 
    |     Method                   |  Params |  FLOPs  |  mIoU  |
