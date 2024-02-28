@@ -63,6 +63,9 @@ def parse_args():
     parser.add_argument('--parallel', type=bool, default=False)
     parser.add_argument('--transform', type=str, choices=['resize','center_scaling'],
                         default='resize') 
+    parser.add_argument('--balance', type=str, choices=['normal','weight','extreme'],
+                        default='normal')
+    parser.add_argument('--balance', type=str,default='False')
     parser.add_argument('--model', type=str, choices=['unet','unet_coord','unext_seg_adapt_l','unetr'],
                         default='unet')  #todo 
     parser.add_argument('--opt', type=str, default='AdamW')
@@ -92,14 +95,14 @@ def main(args):
     
     
 
-    valset = MNISTResizeDataset(img_dir = args.val_dir, transform = transform_dict[args.transform])
+    valset = MNISTResizeDataset(img_dir = args.val_dir, background = args.background,  balance = args.balance ,transform = transform_dict[args.transform])
     valloader = DataLoader(valset, batch_size=4,shuffle=False, pin_memory=True, num_workers=4, drop_last=False)
     
 
     global MODE
     MODE = 'train'
 
-    trainset = MNISTResizeDataset(img_dir = args.train_dir, transform = transform_dict[args.transform])
+    trainset = MNISTResizeDataset(img_dir = args.train_dir,ackground = args.background,  balance = args.balance, transform = transform_dict[args.transform])
     
     trainloader = DataLoader(trainset, batch_size=args.batch_size, shuffle=True,
                              pin_memory=True, num_workers=8, drop_last=True)
@@ -119,7 +122,7 @@ def main(args):
 
 def init_basic_elems(args):
     model_zoo = {'unet': U_Net_vanilla,'unetr': UNETR_2d,'unet_coord':U_Net_coord,'unext_seg_adapt_l':UNext_seg_adapt_l} # todo: setup models
-    model = model_zoo[args.model](in_ch =args.in_ch,out_ch = args.nb_classes)
+    model = model_zoo[args.model](in_ch =args.in_ch,out_ch = args.nb_classes - int(args.background))
 
     if args.opt == 'SGD':
         optimizer = SGD([{'params': [param for name, param in model.named_parameters()
@@ -148,11 +151,7 @@ def train(model, trainloader, valloader, optimizer, args ,add_normal = None,lr_s
 
     if MODE == 'train':
         checkpoints = []
-    if args.nb_classes ==2:
-        weights = [1,5] 
-        
-    else:
-        weights = args.class_weights #[1,7,7,7,6,10]
+    weights = args.class_weights[ :args.nb_classses - int(args.background)+1]
     class_weights = torch.FloatTensor(weights).cuda()
     if add_normal != None:
         dataloader_iterator = iter(add_normal)
