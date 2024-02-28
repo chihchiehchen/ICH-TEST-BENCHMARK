@@ -17,6 +17,7 @@ This is the official implementation of our work "Exploring a Better Network Arch
 
 ## MNIST dataset (segmentation, resize to 512 x 512)
     We test if network architectures are capatable of detecting long range relations. Run the following command:
+    
     ```bash
     python main_train.py --model unet(unet_coord/unetr/unext_seg_adapt_l)
     ```
