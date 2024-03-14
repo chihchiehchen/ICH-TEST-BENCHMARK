@@ -41,4 +41,5 @@ This is the official implementation of our work "Exploring a Better Network Arch
    | :-------------------------:  | :-----: | :-----: | :----: |
    |     UNETR                    |  85.47  |  105.65 |  73.13 |
    |     SwinUNETR                |   6.28  |   19.61 |  92.69 |
+   |     DCN-UNet                 |  17.52  |   38.07 |  93.60 | 
    |     SUNeXt-L (Ours)          |  11.97  |  25.65  |  93.72 |
