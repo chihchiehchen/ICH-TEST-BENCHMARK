@@ -11,7 +11,7 @@ This is the official implementation of our work "Exploring a Better Network Arch
    ```bash
    pip install numpy pillow cv2 torch torchvision albumentations  monai==1.2.0 timm==0.9.12
    ```
-
+   To use DCN-UNet, follow [the link](https://github.com/OpenGVLab/InternImage/issues/84) to compile DCNv3.
 
 ## Results
 
