@@ -43,3 +43,11 @@ This is the official implementation of our work "Exploring a Better Network Arch
    |     SwinUNETR                |   6.28  |   19.61 |  92.69 |
    |     DCN-UNet                 |  17.52  |   38.07 |  93.60 | 
    |     SUNeXt-L (Ours)          |  11.97  |  25.65  |  93.72 |
+
+## Illustrations (red for wrong predictions)
+
+## UNet in Task 1  
+<img src="https://github.com/chihchiehchen/ICH-TEST-BENCHMARK/blob/main/network/unet_check_394.png" height="240px" width="240px" /><img src="https://github.com/chihchiehchen/ICH-TEST-BENCHMARK/blob/main/network/unet_check_4563.png" height="240px" width="240px" />
+
+## UNETR in Task 2  
+<img src="https://github.com/chihchiehchen/ICH-TEST-BENCHMARK/blob/main/network/unetr_check_183.png" height="240px" width="240px" /><img src="https://github.com/chihchiehchen/ICH-TEST-BENCHMARK/blob/main/network/unetr_check_1840.png" height="240px" width="240px" />
