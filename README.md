@@ -1,5 +1,5 @@
 # Exploring-a-Better-Network-Architecture-for-Large-Scale-ICH-Segmentation
-This is the official implementation of our work "Exploring a Better Network Architecture for Large-Scale ICH Segmentation". Since our collected ICH datasets are unavailable, we construct simulated datasets to partially exlain why UNet and UNETR achieve suboptimal results in ICH multi-class segmentation tasks. The results suggest that either network architectures or training strategies shall be modified for these two networks. 
+This is the official implementation of our work "Detection and multiclass semantic segmentation of intracranial hemorrhage on computed tomography scans using deep learning: A comprehensive retrospective study". Since our collected ICH datasets are unavailable, we construct simulated datasets to partially exlain why UNet and UNETR achieve suboptimal results in ICH multi-class segmentation tasks. The results suggest that either network architectures or training strategies shall be modified for these two networks. 
 
 ## Create masks for MNIST simulated segmentation dataset
    Extract mnist_png.tar.gz in the repository, find train and test directories and run 
